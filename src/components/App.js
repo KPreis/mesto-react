@@ -1,30 +1,36 @@
-import Header from './components/Header';
-import Main from './components/Main';
-import Footer from './components/Footer';
-import ImagePopup from './components/ImagePopup';
-import PopupWithForm from './components/PopupWithForm';
-import { api } from './utils/api.js';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+import ImagePopup from './ImagePopup';
+import PopupWithForm from './PopupWithForm';
+import { api } from './Api.js';
 import {
   fieldsetAddPlace,
   fieldsetEditProfile,
   fieldsetEditAvstar,
-} from './utils/consts.js';
-import React, { useEffect, useState } from 'react';
+} from '../utils/consts.js';
+import React from 'react';
 
 function App() {
-  const [cards, setData] = useState([]);
-  const [dataProfile, setDataProfile] = useState([]);
-  const [card, setCard] = useState(null);
-  const [isEditProfilePopupOpen, setIsOpenEditProfilePopup] = useState(false);
-  const [isAddPlacePopupOpen, setIsOpenAddPlacePopup] = useState(false);
-  const [isEditAvatarPopupOpen, setIsOpenEditAvatarPopup] = useState(false);
-  useEffect(() => {
-    Promise.all([api.getInitialCards(), api.getProfile()]).then(
-      ([initialCards, profileData]) => {
+  const [cards, setData] = React.useState([]);
+  const [dataProfile, setDataProfile] = React.useState({});
+  const [card, setCard] = React.useState(null);
+  const [isEditProfilePopupOpen, setIsOpenEditProfilePopup] = React.useState(
+    false
+  );
+  const [isAddPlacePopupOpen, setIsOpenAddPlacePopup] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsOpenEditAvatarPopup] = React.useState(
+    false
+  );
+  React.useEffect(() => {
+    Promise.all([api.getInitialCards(), api.getProfile()])
+      .then(([initialCards, profileData]) => {
         setData(initialCards);
         setDataProfile(profileData);
-      }
-    );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const handleCardClick = (card) => {
@@ -64,6 +70,7 @@ function App() {
         <PopupWithForm
           title={'Обновить аватар'}
           id={'avatarUpdatePopup'}
+          textButton={'Сохранить'}
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
         >
@@ -73,6 +80,7 @@ function App() {
         <PopupWithForm
           title={'Редактировать профиль'}
           id={'profileEditPopup'}
+          textButton={'Сохранить'}
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
         >
@@ -82,6 +90,7 @@ function App() {
         <PopupWithForm
           title={'Новое место'}
           id={'cardAddPopup'}
+          textButton={'Сохранить'}
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
         >

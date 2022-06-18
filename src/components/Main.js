@@ -38,9 +38,13 @@ function Main({
       </section>
       <section className="galary">
         <ul className="galary__cards-list">
-          {cards.map((card, index) => {
+          {cards.map((card) => {
             return (
-              <Card key={index} card={card} handleCardClick={handleCardClick} />
+              <Card
+                key={card._id}
+                card={card}
+                handleCardClick={handleCardClick}
+              />
             );
           })}
         </ul>
