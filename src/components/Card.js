@@ -1,3 +1,4 @@
+import React from 'react';
 function Card({ card, handleCardClick }) {
   return (
     <li className="card" key={card._id}>

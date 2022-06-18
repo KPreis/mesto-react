@@ -9,7 +9,7 @@ import {
   fieldsetEditProfile,
   fieldsetEditAvstar,
 } from './utils/consts.js';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function App() {
   const [cards, setData] = useState([]);

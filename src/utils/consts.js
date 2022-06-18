@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const validationConfig = {
   formSelector: '.form',
   inputSelector: '.form__item',
