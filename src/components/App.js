@@ -3,7 +3,7 @@ import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
-import { api } from './Api.js';
+import { api } from '../utils/api.js';
 import {
   fieldsetAddPlace,
   fieldsetEditProfile,

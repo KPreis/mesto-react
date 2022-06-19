@@ -1,4 +1,4 @@
-import { authConfig } from '../utils/consts.js';
+import { authConfig } from './consts.js';
 
 class Api {
   constructor({ baseUrl, headers }) {
