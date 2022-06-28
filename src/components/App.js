@@ -9,6 +9,7 @@ import {
   fieldsetEditProfile,
   fieldsetEditAvstar,
 } from '../utils/consts.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
 
 function App() {
@@ -55,49 +56,50 @@ function App() {
 
   return (
     <div className="App">
-      <div className="page">
-        <Header />
-        <Main
-          cards={cards}
-          dataProfile={dataProfile}
-          handleCardClick={handleCardClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-        />
-        <Footer />
-        <ImagePopup card={card} onClose={closeAllPopups} />
-        <PopupWithForm
-          title={'Обновить аватар'}
-          id={'avatarUpdatePopup'}
-          textButton={'Сохранить'}
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-        >
-          {fieldsetEditAvstar}
-        </PopupWithForm>
-        ;
-        <PopupWithForm
-          title={'Редактировать профиль'}
-          id={'profileEditPopup'}
-          textButton={'Сохранить'}
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-        >
-          {fieldsetEditProfile}
-        </PopupWithForm>
-        ;
-        <PopupWithForm
-          title={'Новое место'}
-          id={'cardAddPopup'}
-          textButton={'Сохранить'}
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-        >
-          {fieldsetAddPlace}
-        </PopupWithForm>
-        ;
-      </div>
+      <CurrentUserContext.Provider value={dataProfile}>
+        <div className="page">
+          <Header />
+          <Main
+            cards={cards}
+            handleCardClick={handleCardClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+          />
+          <Footer />
+          <ImagePopup card={card} onClose={closeAllPopups} />
+          <PopupWithForm
+            title={'Обновить аватар'}
+            id={'avatarUpdatePopup'}
+            textButton={'Сохранить'}
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+          >
+            {fieldsetEditAvstar}
+          </PopupWithForm>
+          ;
+          <PopupWithForm
+            title={'Редактировать профиль'}
+            id={'profileEditPopup'}
+            textButton={'Сохранить'}
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+          >
+            {fieldsetEditProfile}
+          </PopupWithForm>
+          ;
+          <PopupWithForm
+            title={'Новое место'}
+            id={'cardAddPopup'}
+            textButton={'Сохранить'}
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+          >
+            {fieldsetAddPlace}
+          </PopupWithForm>
+          ;
+        </div>
+      </CurrentUserContext.Provider>
     </div>
   );
 }

@@ -1,34 +1,35 @@
 import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
 
 function Main({
-  dataProfile,
   cards,
   handleCardClick,
   onEditProfile,
   onAddPlace,
   onEditAvatar,
 }) {
+  const currentUser = React.useContext(CurrentUserContext);
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-container" onClick={onEditAvatar}>
           <img
             className="profile__avatar"
-            src={dataProfile.avatar}
-            alt={dataProfile.name}
+            src={currentUser.avatar}
+            alt={currentUser.name}
           />
         </div>
         <div className="profile__info">
           <div className="profile__name-with-button">
-            <h1 className="profile__name">{dataProfile.name}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               type="button"
               className="profile__edit-button"
               onClick={onEditProfile}
             ></button>
           </div>
-          <p className="profile__description">{dataProfile.about}</p>
+          <p className="profile__description">{currentUser.about}</p>
         </div>
         <button
           type="button"
