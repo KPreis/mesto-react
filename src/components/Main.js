@@ -8,6 +8,7 @@ function Main({
   onEditProfile,
   onAddPlace,
   onEditAvatar,
+  handleCardLike,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   return (
@@ -45,6 +46,7 @@ function Main({
                 key={card._id}
                 card={card}
                 handleCardClick={handleCardClick}
+                handleCardLike={handleCardLike}
               />
             );
           })}

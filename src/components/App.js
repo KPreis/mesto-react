@@ -14,7 +14,7 @@ import React from 'react';
 
 function App() {
   const [cards, setData] = React.useState([]);
-  const [dataProfile, setDataProfile] = React.useState({});
+  const [currentUser, setDataProfile] = React.useState({});
   const [card, setCard] = React.useState(null);
   const [isEditProfilePopupOpen, setIsOpenEditProfilePopup] = React.useState(
     false
@@ -25,9 +25,9 @@ function App() {
   );
   React.useEffect(() => {
     Promise.all([api.getInitialCards(), api.getProfile()])
-      .then(([initialCards, profileData]) => {
+      .then(([initialCards, currentUser]) => {
         setData(initialCards);
-        setDataProfile(profileData);
+        setDataProfile(currentUser);
       })
       .catch((error) => {
         console.log(error);
@@ -54,9 +54,17 @@ function App() {
     setCard(null);
   };
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      setData((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    });
+  }
+
   return (
     <div className="App">
-      <CurrentUserContext.Provider value={dataProfile}>
+      <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
           <Header />
           <Main
@@ -65,6 +73,7 @@ function App() {
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
+            handleCardLike={handleCardLike}
           />
           <Footer />
           <ImagePopup card={card} onClose={closeAllPopups} />

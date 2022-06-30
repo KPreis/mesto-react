@@ -1,9 +1,12 @@
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
 
-function Card({ card, handleCardClick }) {
+function Card({ card, handleCardClick, handleCardLike }) {
   const onCardClick = () => {
     handleCardClick(card);
+  };
+  const onCardLike = () => {
+    handleCardLike(card);
   };
 
   const currentUser = React.useContext(CurrentUserContext);
@@ -29,6 +32,7 @@ function Card({ card, handleCardClick }) {
         <div className="card__like-block">
           <button
             className={`card__like ${isLiked && 'card__like_active'}`}
+            onClick={onCardLike}
             type="button"
           ></button>
           <p className="card__like-counter">{card.likes.length}</p>
