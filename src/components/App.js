@@ -54,13 +54,19 @@ function App() {
     setCard(null);
   };
 
-  function handleCardLike(card) {
+  const handleCardLike = (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setData((state) => state.map((c) => (c._id === card._id ? newCard : c)));
     });
-  }
+  };
+
+  const handleCardDelete = (card) => {
+    api.deleteCard(card._id).then(() => {
+      setData(cards.filter((result) => result._id !== card._id));
+    });
+  };
 
   return (
     <div className="App">
@@ -74,6 +80,7 @@ function App() {
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
             handleCardLike={handleCardLike}
+            handleCardDelete={handleCardDelete}
           />
           <Footer />
           <ImagePopup card={card} onClose={closeAllPopups} />

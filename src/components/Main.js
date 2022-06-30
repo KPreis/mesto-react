@@ -9,6 +9,7 @@ function Main({
   onAddPlace,
   onEditAvatar,
   handleCardLike,
+  handleCardDelete,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   return (
@@ -47,6 +48,7 @@ function Main({
                 card={card}
                 handleCardClick={handleCardClick}
                 handleCardLike={handleCardLike}
+                handleCardDelete={handleCardDelete}
               />
             );
           })}
