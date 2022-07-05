@@ -51,7 +51,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: `${profile['name']}`,
-        about: `${profile['description']}`,
+        about: `${profile['about']}`,
       }),
     }).then(this._checkResponse);
   }

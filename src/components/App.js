@@ -3,18 +3,15 @@ import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from './EditProfilePopup';
 import { api } from '../utils/api.js';
-import {
-  fieldsetAddPlace,
-  fieldsetEditProfile,
-  fieldsetEditAvstar,
-} from '../utils/consts.js';
+import { fieldsetAddPlace, fieldsetEditAvstar } from '../utils/consts.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
 
 function App() {
   const [cards, setData] = React.useState([]);
-  const [currentUser, setDataProfile] = React.useState({});
+  const [currentUser, setDataProfile] = React.useState({ name: '', about: '' });
   const [card, setCard] = React.useState(null);
   const [isEditProfilePopupOpen, setIsOpenEditProfilePopup] = React.useState(
     false
@@ -25,9 +22,9 @@ function App() {
   );
   React.useEffect(() => {
     Promise.all([api.getInitialCards(), api.getProfile()])
-      .then(([initialCards, currentUser]) => {
+      .then(([initialCards, dataProfile]) => {
         setData(initialCards);
-        setDataProfile(currentUser);
+        setDataProfile(dataProfile);
       })
       .catch((error) => {
         console.log(error);
@@ -68,6 +65,18 @@ function App() {
     });
   };
 
+  const handleUpdateUser = (profile) => {
+    api
+      .setProfile(profile)
+      .then((result) => {
+        setDataProfile(result);
+        setIsOpenEditProfilePopup(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
@@ -84,6 +93,11 @@ function App() {
           />
           <Footer />
           <ImagePopup card={card} onClose={closeAllPopups} />
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+          />
           <PopupWithForm
             title={'Обновить аватар'}
             id={'avatarUpdatePopup'}
@@ -92,16 +106,6 @@ function App() {
             onClose={closeAllPopups}
           >
             {fieldsetEditAvstar}
-          </PopupWithForm>
-          ;
-          <PopupWithForm
-            title={'Редактировать профиль'}
-            id={'profileEditPopup'}
-            textButton={'Сохранить'}
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-          >
-            {fieldsetEditProfile}
           </PopupWithForm>
           ;
           <PopupWithForm
