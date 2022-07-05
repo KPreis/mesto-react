@@ -4,8 +4,9 @@ import Footer from './Footer';
 import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 import { api } from '../utils/api.js';
-import { fieldsetAddPlace, fieldsetEditAvstar } from '../utils/consts.js';
+import { fieldsetAddPlace } from '../utils/consts.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
 
@@ -77,6 +78,18 @@ function App() {
       });
   };
 
+  const handleUpdateAvatar = (avatar) => {
+    api
+      .setAvatar(avatar)
+      .then((result) => {
+        setDataProfile(result);
+        setIsOpenEditAvatarPopup(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
@@ -98,16 +111,11 @@ function App() {
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
           />
-          <PopupWithForm
-            title={'Обновить аватар'}
-            id={'avatarUpdatePopup'}
-            textButton={'Сохранить'}
+          <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
-          >
-            {fieldsetEditAvstar}
-          </PopupWithForm>
-          ;
+            onUpdateAvatar={handleUpdateAvatar}
+          />
           <PopupWithForm
             title={'Новое место'}
             id={'cardAddPopup'}
