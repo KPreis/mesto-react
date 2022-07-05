@@ -12,11 +12,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     setDescription(currentUser.about);
   }, [currentUser]);
 
-  const handleChandeName = (e) => {
+  const handleChangeName = (e) => {
     setName(e.target.value);
   };
 
-  const handleChandeDescription = (e) => {
+  const handleChangeDescription = (e) => {
     setDescription(e.target.value);
   };
 
@@ -42,7 +42,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         <input
           className="form__item"
           value={name}
-          onChange={handleChandeName}
+          onChange={handleChangeName}
           id="profileNameEditField"
           type="text"
           name="name"
@@ -54,7 +54,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         <input
           className="form__item"
           value={description}
-          onChange={handleChandeDescription}
+          onChange={handleChangeDescription}
           id="profileDescriptionEditField"
           type="text"
           name="description"

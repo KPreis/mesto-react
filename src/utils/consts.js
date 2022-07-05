@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const validationConfig = {
   formSelector: '.form',
   inputSelector: '.form__item',
@@ -13,30 +11,3 @@ export const authConfig = {
   token: 'eb3b2bc4-a18d-46ae-aeed-207ad13f265c',
   cohortId: 'cohort-41',
 };
-
-export const fieldsetAddPlace = (
-  <fieldset className="form__fields">
-    <input
-      className="form__item"
-      id="cardNameField"
-      type="text"
-      name="name"
-      defaultValue=""
-      placeholder="Название"
-      required
-      minLength="2"
-      maxLength="40"
-    />
-    <span className="form__item-error cardNameField-error"></span>
-    <input
-      className="form__item"
-      id="cardLinkField"
-      type="url"
-      name="link"
-      defaultValue=""
-      placeholder="Ссылка на картинку"
-      required
-    />
-    <span className="form__item-error cardLinkField-error"></span>
-  </fieldset>
-);
