@@ -13,11 +13,11 @@ function App() {
   const [cards, setData] = React.useState([]);
   const [currentUser, setDataProfile] = React.useState({ name: '', about: '' });
   const [card, setCard] = React.useState(null);
-  const [isEditProfilePopupOpen, setIsOpenEditProfilePopup] = React.useState(
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(
     false
   );
-  const [isAddPlacePopupOpen, setIsOpenAddPlacePopup] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsOpenEditAvatarPopup] = React.useState(
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(
     false
   );
   React.useEffect(() => {
@@ -36,33 +36,45 @@ function App() {
   };
 
   const handleEditAvatarClick = () => {
-    setIsOpenEditAvatarPopup(true);
+    setIsEditAvatarPopupOpen(true);
   };
   const handleEditProfileClick = () => {
-    setIsOpenEditProfilePopup(true);
+    setIsEditProfilePopupOpen(true);
   };
   const handleAddPlaceClick = () => {
-    setIsOpenAddPlacePopup(true);
+    setIsAddPlacePopupOpen(true);
   };
   const closeAllPopups = () => {
-    setIsOpenAddPlacePopup(false);
-    setIsOpenEditProfilePopup(false);
-    setIsOpenEditAvatarPopup(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
     setCard(null);
   };
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setData((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setData((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleCardDelete = (card) => {
-    api.deleteCard(card._id).then(() => {
-      setData(cards.filter((result) => result._id !== card._id));
-    });
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        setData(cards.filter((result) => result._id !== card._id));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleUpdateUser = (profile) => {
@@ -70,7 +82,7 @@ function App() {
       .setProfile(profile)
       .then((result) => {
         setDataProfile(result);
-        setIsOpenEditProfilePopup(false);
+        setIsEditProfilePopupOpen(false);
       })
       .catch((error) => {
         console.log(error);
@@ -82,7 +94,7 @@ function App() {
       .setAvatar(avatar)
       .then((result) => {
         setDataProfile(result);
-        setIsOpenEditAvatarPopup(false);
+        setIsEditAvatarPopupOpen(false);
       })
       .catch((error) => {
         console.log(error);
@@ -94,7 +106,7 @@ function App() {
       .sendNewCard(newCard)
       .then((result) => {
         setData([result, ...cards]);
-        setIsOpenAddPlacePopup(false);
+        setIsAddPlacePopupOpen(false);
       })
       .catch((error) => {
         console.log(error);
