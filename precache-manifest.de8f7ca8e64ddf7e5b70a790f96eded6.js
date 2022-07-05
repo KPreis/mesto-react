@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "8825c0a8a3039f4a9ecb",
+    "revision": "5b6c35ce16db4a48ea93",
     "url": "/static/css/main.d03ec3b0.chunk.css"
   },
   {
-    "revision": "8825c0a8a3039f4a9ecb",
-    "url": "/static/js/main.8825c0a8.chunk.js"
+    "revision": "5b6c35ce16db4a48ea93",
+    "url": "/static/js/main.5b6c35ce.chunk.js"
   },
   {
     "revision": "b4580c6e423a71b044a8",
@@ -32,20 +32,16 @@ self.__precacheManifest = [
     "url": "/static/media/Inter-Regular.dc131113.woff2"
   },
   {
-    "revision": "c0638bea87a05fdfa2bb3bba2efe54e4",
-    "url": "/static/media/Inter-Medium.c0638bea.woff"
-  },
-  {
     "revision": "75db5319e7e87c587019a5df08d7272c",
     "url": "/static/media/Inter-Medium.75db5319.woff2"
   },
   {
-    "revision": "661569afe57a38e1529a775a465da20b",
-    "url": "/static/media/Inter-Black.661569af.woff2"
+    "revision": "d476a8b86d0b656cfa463c1148e96069",
+    "url": "/static/media/edit-pen.d476a8b8.svg"
   },
   {
-    "revision": "d0b121f3a9d3d88afdfd6902d31ee9a0",
-    "url": "/static/media/Inter-Black.d0b121f3.woff"
+    "revision": "661569afe57a38e1529a775a465da20b",
+    "url": "/static/media/Inter-Black.661569af.woff2"
   },
   {
     "revision": "b2fce4ac45f3d116cd48ec8d068ab723",
@@ -56,27 +52,31 @@ self.__precacheManifest = [
     "url": "/static/media/trash-icon.4831282e.svg"
   },
   {
-    "revision": "6bfdb35467f51d3ba1f70f8d4a9c2b59",
-    "url": "/static/media/edit-icon.6bfdb354.svg"
-  },
-  {
-    "revision": "d476a8b86d0b656cfa463c1148e96069",
-    "url": "/static/media/edit-pen.d476a8b8.svg"
+    "revision": "c0638bea87a05fdfa2bb3bba2efe54e4",
+    "url": "/static/media/Inter-Medium.c0638bea.woff"
   },
   {
     "revision": "e2e95a1709cdd7265876927fdff95930",
     "url": "/static/media/close-Icon.e2e95a17.svg"
   },
   {
+    "revision": "6bfdb35467f51d3ba1f70f8d4a9c2b59",
+    "url": "/static/media/edit-icon.6bfdb354.svg"
+  },
+  {
     "revision": "eec224cbddb8500ac62361155b34f265",
     "url": "/static/media/like-icon.eec224cb.svg"
+  },
+  {
+    "revision": "d0b121f3a9d3d88afdfd6902d31ee9a0",
+    "url": "/static/media/Inter-Black.d0b121f3.woff"
   },
   {
     "revision": "302bdf76b9210a2a438f500909a8d36c",
     "url": "/static/media/like-icon-active.302bdf76.svg"
   },
   {
-    "revision": "272692b03221e486a2aba7bf4546b20f",
+    "revision": "5036012ff275c89c9d7e6248015f526f",
     "url": "/index.html"
   }
 ];
